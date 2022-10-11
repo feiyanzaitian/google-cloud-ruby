@@ -1,6 +1,5 @@
-# Ruby Client for Cloud Bigtable API
-
-[Cloud Bigtable API][Product Documentation]:
+ud Bigtable API
+igtable API][Product Documentation]:
 API for reading and writing the contents of Bigtables associated with a
 cloud project.
 - [Client Library Documentation][]
