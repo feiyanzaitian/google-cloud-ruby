@@ -67,7 +67,8 @@ module Google
           #     not successful.
           # @!attribute [rw] progress
           #   @return [::Google::Cloud::Bigtable::Admin::V2::OperationProgress]
-          #     The progress of the {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#restore_table RestoreTable}
+          #     The progress of the
+          #     {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#restore_table RestoreTable}
           #     operation.
           class RestoreTableMetadata
             include ::Google::Protobuf::MessageExts
@@ -97,8 +98,8 @@ module Google
           #     Values are of the form `projects/{project}/instances/{instance}`.
           # @!attribute [rw] table_id
           #   @return [::String]
-          #     Required. The name by which the new table should be referred to within the parent
-          #     instance, e.g., `foobar` rather than `{parent}/tables/foobar`.
+          #     Required. The name by which the new table should be referred to within the
+          #     parent instance, e.g., `foobar` rather than `{parent}/tables/foobar`.
           #     Maximum 50 characters.
           # @!attribute [rw] table
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Table]
@@ -148,13 +149,13 @@ module Google
           #     Values are of the form `projects/{project}/instances/{instance}`.
           # @!attribute [rw] table_id
           #   @return [::String]
-          #     Required. The name by which the new table should be referred to within the parent
-          #     instance, e.g., `foobar` rather than `{parent}/tables/foobar`.
+          #     Required. The name by which the new table should be referred to within the
+          #     parent instance, e.g., `foobar` rather than `{parent}/tables/foobar`.
           # @!attribute [rw] source_snapshot
           #   @return [::String]
-          #     Required. The unique name of the snapshot from which to restore the table. The
-          #     snapshot and the table must be in the same instance.
-          #     Values are of the form
+          #     Required. The unique name of the snapshot from which to restore the table.
+          #     The snapshot and the table must be in the same instance. Values are of the
+          #     form
           #     `projects/{project}/instances/{instance}/clusters/{cluster}/snapshots/{snapshot}`.
           class CreateTableFromSnapshotRequest
             include ::Google::Protobuf::MessageExts
@@ -184,12 +185,13 @@ module Google
           # {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#list_tables google.bigtable.admin.v2.BigtableTableAdmin.ListTables}
           # @!attribute [rw] parent
           #   @return [::String]
-          #     Required. The unique name of the instance for which tables should be listed.
-          #     Values are of the form `projects/{project}/instances/{instance}`.
+          #     Required. The unique name of the instance for which tables should be
+          #     listed. Values are of the form `projects/{project}/instances/{instance}`.
           # @!attribute [rw] view
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Table::View]
           #     The view to be applied to the returned tables' fields.
-          #     Only NAME_ONLY view (default) and REPLICATION_VIEW are supported.
+          #     Only NAME_ONLY view (default), REPLICATION_VIEW and ENCRYPTION_VIEW are
+          #     supported.
           # @!attribute [rw] page_size
           #   @return [::Integer]
           #     Maximum number of results per page.
@@ -326,10 +328,10 @@ module Google
           #     `projects/{project}/instances/{instance}/tables/{table}`.
           # @!attribute [rw] modifications
           #   @return [::Array<::Google::Cloud::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification>]
-          #     Required. Modifications to be atomically applied to the specified table's families.
-          #     Entries are applied in order, meaning that earlier modifications can be
-          #     masked by later ones (in the case of repeated updates to the same family,
-          #     for example).
+          #     Required. Modifications to be atomically applied to the specified table's
+          #     families. Entries are applied in order, meaning that earlier modifications
+          #     can be masked by later ones (in the case of repeated updates to the same
+          #     family, for example).
           class ModifyColumnFamiliesRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -360,8 +362,8 @@ module Google
           # {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#generate_consistency_token google.bigtable.admin.v2.BigtableTableAdmin.GenerateConsistencyToken}
           # @!attribute [rw] name
           #   @return [::String]
-          #     Required. The unique name of the Table for which to create a consistency token.
-          #     Values are of the form
+          #     Required. The unique name of the Table for which to create a consistency
+          #     token. Values are of the form
           #     `projects/{project}/instances/{instance}/tables/{table}`.
           class GenerateConsistencyTokenRequest
             include ::Google::Protobuf::MessageExts
@@ -382,8 +384,8 @@ module Google
           # {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#check_consistency google.bigtable.admin.v2.BigtableTableAdmin.CheckConsistency}
           # @!attribute [rw] name
           #   @return [::String]
-          #     Required. The unique name of the Table for which to check replication consistency.
-          #     Values are of the form
+          #     Required. The unique name of the Table for which to check replication
+          #     consistency. Values are of the form
           #     `projects/{project}/instances/{instance}/tables/{table}`.
           # @!attribute [rw] consistency_token
           #   @return [::String]
@@ -423,9 +425,9 @@ module Google
           #     `projects/{project}/instances/{instance}/clusters/{cluster}`.
           # @!attribute [rw] snapshot_id
           #   @return [::String]
-          #     Required. The ID by which the new snapshot should be referred to within the parent
-          #     cluster, e.g., `mysnapshot` of the form: `[_a-zA-Z0-9][-_.a-zA-Z0-9]*`
-          #     rather than
+          #     Required. The ID by which the new snapshot should be referred to within the
+          #     parent cluster, e.g., `mysnapshot` of the form:
+          #     `[_a-zA-Z0-9][-_.a-zA-Z0-9]*` rather than
           #     `projects/{project}/instances/{instance}/clusters/{cluster}/snapshots/mysnapshot`.
           # @!attribute [rw] ttl
           #   @return [::Google::Protobuf::Duration]
@@ -467,8 +469,8 @@ module Google
           # for production use. It is not subject to any SLA or deprecation policy.
           # @!attribute [rw] parent
           #   @return [::String]
-          #     Required. The unique name of the cluster for which snapshots should be listed.
-          #     Values are of the form
+          #     Required. The unique name of the cluster for which snapshots should be
+          #     listed. Values are of the form
           #     `projects/{project}/instances/{instance}/clusters/{cluster}`.
           #     Use `{cluster} = '-'` to list snapshots for all clusters in an instance,
           #     e.g., `projects/{project}/instances/{instance}/clusters/-`.
@@ -562,7 +564,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request for {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#create_backup CreateBackup}.
+          # The request for
+          # {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#create_backup CreateBackup}.
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. This must be one of the clusters in the instance in which this
@@ -603,7 +606,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request for {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#update_backup UpdateBackup}.
+          # The request for
+          # {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#update_backup UpdateBackup}.
           # @!attribute [rw] backup
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Backup]
           #     Required. The backup to update. `backup.name`, and the fields to be updated
@@ -622,7 +626,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request for {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#get_backup GetBackup}.
+          # The request for
+          # {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#get_backup GetBackup}.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. Name of the backup.
@@ -633,7 +638,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request for {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#delete_backup DeleteBackup}.
+          # The request for
+          # {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#delete_backup DeleteBackup}.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. Name of the backup to delete.
@@ -644,7 +650,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The request for {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#list_backups ListBackups}.
+          # The request for
+          # {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#list_backups ListBackups}.
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The cluster to list backups from.  Values are of the
@@ -688,8 +695,9 @@ module Google
           # @!attribute [rw] order_by
           #   @return [::String]
           #     An expression for specifying the sort order of the results of the request.
-          #     The string value should specify one or more fields in {::Google::Cloud::Bigtable::Admin::V2::Backup Backup}. The full
-          #     syntax is described at https://aip.dev/132#ordering.
+          #     The string value should specify one or more fields in
+          #     {::Google::Cloud::Bigtable::Admin::V2::Backup Backup}. The full syntax is described at
+          #     https://aip.dev/132#ordering.
           #
           #     Fields supported are:
           #        * name
@@ -714,24 +722,82 @@ module Google
           # @!attribute [rw] page_token
           #   @return [::String]
           #     If non-empty, `page_token` should contain a
-          #     {::Google::Cloud::Bigtable::Admin::V2::ListBackupsResponse#next_page_token next_page_token} from a
-          #     previous {::Google::Cloud::Bigtable::Admin::V2::ListBackupsResponse ListBackupsResponse} to the same `parent` and with the same
-          #     `filter`.
+          #     {::Google::Cloud::Bigtable::Admin::V2::ListBackupsResponse#next_page_token next_page_token}
+          #     from a previous
+          #     {::Google::Cloud::Bigtable::Admin::V2::ListBackupsResponse ListBackupsResponse} to the
+          #     same `parent` and with the same `filter`.
           class ListBackupsRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The response for {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#list_backups ListBackups}.
+          # The response for
+          # {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#list_backups ListBackups}.
           # @!attribute [rw] backups
           #   @return [::Array<::Google::Cloud::Bigtable::Admin::V2::Backup>]
           #     The list of matching backups.
           # @!attribute [rw] next_page_token
           #   @return [::String]
           #     `next_page_token` can be sent in a subsequent
-          #     {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#list_backups ListBackups} call to fetch more
-          #     of the matching backups.
+          #     {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#list_backups ListBackups} call
+          #     to fetch more of the matching backups.
           class ListBackupsResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The request for
+          # {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#copy_backup CopyBackup}.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The name of the destination cluster that will contain the backup
+          #     copy. The cluster must already exist. Values are of the form:
+          #     `projects/{project}/instances/{instance}/clusters/{cluster}`.
+          # @!attribute [rw] backup_id
+          #   @return [::String]
+          #     Required. The id of the new backup. The `backup_id` along with `parent`
+          #     are combined as `{parent}/backups/{backup_id}` to create the full backup
+          #     name, of the form:
+          #     `projects/{project}/instances/{instance}/clusters/{cluster}/backups/{backup_id}`.
+          #     This string must be between 1 and 50 characters in length and match the
+          #     regex `[_a-zA-Z0-9][-_.a-zA-Z0-9]*`.
+          # @!attribute [rw] source_backup
+          #   @return [::String]
+          #     Required. The source backup to be copied from.
+          #     The source backup needs to be in READY state for it to be copied.
+          #     Copying a copied backup is not allowed.
+          #     Once CopyBackup is in progress, the source backup cannot be deleted or
+          #     cleaned up on expiration until CopyBackup is finished.
+          #     Values are of the form:
+          #     `projects/<project>/instances/<instance>/clusters/<cluster>/backups/<backup>`.
+          # @!attribute [rw] expire_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Required. Required. The expiration time of the copied backup with
+          #     microsecond granularity that must be at least 6 hours and at most 30 days
+          #     from the time the request is received. Once the `expire_time` has
+          #     passed, Cloud Bigtable will delete the backup and free the resources used
+          #     by the backup.
+          class CopyBackupRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Metadata type for the google.longrunning.Operation returned by
+          # {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#copy_backup CopyBackup}.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     The name of the backup being created through the copy operation.
+          #     Values are of the form
+          #     `projects/<project>/instances/<instance>/clusters/<cluster>/backups/<backup>`.
+          # @!attribute [rw] source_backup_info
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::BackupInfo]
+          #     Information about the source backup that is being copied from.
+          # @!attribute [rw] progress
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::OperationProgress]
+          #     The progress of the
+          #     {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#copy_backup CopyBackup}
+          #     operation.
+          class CopyBackupMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

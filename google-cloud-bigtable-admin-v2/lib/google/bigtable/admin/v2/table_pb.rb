@@ -93,6 +93,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.bigtable.admin.v2.Backup" do
       optional :name, :string, 1
       optional :source_table, :string, 2
+      optional :source_backup, :string, 10
       optional :expire_time, :message, 3, "google.protobuf.Timestamp"
       optional :start_time, :message, 4, "google.protobuf.Timestamp"
       optional :end_time, :message, 5, "google.protobuf.Timestamp"
@@ -110,6 +111,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :start_time, :message, 2, "google.protobuf.Timestamp"
       optional :end_time, :message, 3, "google.protobuf.Timestamp"
       optional :source_table, :string, 4
+      optional :source_backup, :string, 10
     end
     add_enum "google.bigtable.admin.v2.RestoreSourceType" do
       value :RESTORE_SOURCE_TYPE_UNSPECIFIED, 0

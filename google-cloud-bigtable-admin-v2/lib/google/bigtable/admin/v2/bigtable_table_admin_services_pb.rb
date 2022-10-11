@@ -118,8 +118,8 @@ module Google
               # [metadata][google.longrunning.Operation.metadata] field type is
               # [CreateBackupMetadata][google.bigtable.admin.v2.CreateBackupMetadata]. The
               # [response][google.longrunning.Operation.response] field type is
-              # [Backup][google.bigtable.admin.v2.Backup], if successful. Cancelling the returned operation will stop the
-              # creation and delete the backup.
+              # [Backup][google.bigtable.admin.v2.Backup], if successful. Cancelling the
+              # returned operation will stop the creation and delete the backup.
               rpc :CreateBackup, ::Google::Cloud::Bigtable::Admin::V2::CreateBackupRequest, ::Google::Longrunning::Operation
               # Gets metadata on a pending or completed Cloud Bigtable Backup.
               rpc :GetBackup, ::Google::Cloud::Bigtable::Admin::V2::GetBackupRequest, ::Google::Cloud::Bigtable::Admin::V2::Backup
@@ -139,14 +139,17 @@ module Google
               # [response][google.longrunning.Operation.response] type is
               # [Table][google.bigtable.admin.v2.Table], if successful.
               rpc :RestoreTable, ::Google::Cloud::Bigtable::Admin::V2::RestoreTableRequest, ::Google::Longrunning::Operation
-              # Gets the access control policy for a Table or Backup resource.
+              # Copy a Cloud Bigtable backup to a new backup in the destination cluster
+              # located in the destination instance and project.
+              rpc :CopyBackup, ::Google::Cloud::Bigtable::Admin::V2::CopyBackupRequest, ::Google::Longrunning::Operation
+              # Gets the access control policy for a Table resource.
               # Returns an empty policy if the resource exists but does not have a policy
               # set.
               rpc :GetIamPolicy, ::Google::Iam::V1::GetIamPolicyRequest, ::Google::Iam::V1::Policy
-              # Sets the access control policy on a Table or Backup resource.
+              # Sets the access control policy on a Table resource.
               # Replaces any existing policy.
               rpc :SetIamPolicy, ::Google::Iam::V1::SetIamPolicyRequest, ::Google::Iam::V1::Policy
-              # Returns permissions that the caller has on the specified Table or Backup resource.
+              # Returns permissions that the caller has on the specified table resource.
               rpc :TestIamPermissions, ::Google::Iam::V1::TestIamPermissionsRequest, ::Google::Iam::V1::TestIamPermissionsResponse
             end
 

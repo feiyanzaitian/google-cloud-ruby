@@ -183,6 +183,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :backups, :message, 1, "google.bigtable.admin.v2.Backup"
       optional :next_page_token, :string, 2
     end
+    add_message "google.bigtable.admin.v2.CopyBackupRequest" do
+      optional :parent, :string, 1
+      optional :backup_id, :string, 2
+      optional :source_backup, :string, 3
+      optional :expire_time, :message, 4, "google.protobuf.Timestamp"
+    end
+    add_message "google.bigtable.admin.v2.CopyBackupMetadata" do
+      optional :name, :string, 1
+      optional :source_backup_info, :message, 2, "google.bigtable.admin.v2.BackupInfo"
+      optional :progress, :message, 3, "google.bigtable.admin.v2.OperationProgress"
+    end
   end
 end
 
@@ -226,6 +237,8 @@ module Google
           DeleteBackupRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.DeleteBackupRequest").msgclass
           ListBackupsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListBackupsRequest").msgclass
           ListBackupsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListBackupsResponse").msgclass
+          CopyBackupRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CopyBackupRequest").msgclass
+          CopyBackupMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CopyBackupMetadata").msgclass
         end
       end
     end

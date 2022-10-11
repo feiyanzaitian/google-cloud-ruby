@@ -273,32 +273,31 @@ module Google
           # for production use. It is not subject to any SLA or deprecation policy.
           # @!attribute [rw] name
           #   @return [::String]
-          #     Output only. The unique name of the snapshot.
+          #     The unique name of the snapshot.
           #     Values are of the form
           #     `projects/{project}/instances/{instance}/clusters/{cluster}/snapshots/{snapshot}`.
-          # @!attribute [rw] source_table
+          # @!attribute [r] source_table
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Table]
           #     Output only. The source table at the time the snapshot was taken.
-          # @!attribute [rw] data_size_bytes
+          # @!attribute [r] data_size_bytes
           #   @return [::Integer]
-          #     Output only. The size of the data in the source table at the time the
-          #     snapshot was taken. In some cases, this value may be computed
-          #     asynchronously via a background process and a placeholder of 0 will be used
-          #     in the meantime.
-          # @!attribute [rw] create_time
+          #     Output only. The size of the data in the source table at the time the snapshot was
+          #     taken. In some cases, this value may be computed asynchronously via a
+          #     background process and a placeholder of 0 will be used in the meantime.
+          # @!attribute [r] create_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Output only. The time when the snapshot is created.
           # @!attribute [rw] delete_time
           #   @return [::Google::Protobuf::Timestamp]
-          #     Output only. The time when the snapshot will be deleted. The maximum amount
-          #     of time a snapshot can stay active is 365 days. If 'ttl' is not specified,
+          #     The time when the snapshot will be deleted. The maximum amount of time a
+          #     snapshot can stay active is 365 days. If 'ttl' is not specified,
           #     the default maximum of 365 days will be used.
-          # @!attribute [rw] state
+          # @!attribute [r] state
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Snapshot::State]
           #     Output only. The current state of the snapshot.
           # @!attribute [rw] description
           #   @return [::String]
-          #     Output only. Description of the snapshot.
+          #     Description of the snapshot.
           class Snapshot
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -336,6 +335,12 @@ module Google
           #     Required. Immutable. Name of the table from which this backup was created. This needs
           #     to be in the same instance as the backup. Values are of the form
           #     `projects/{project}/instances/{instance}/tables/{source_table}`.
+          # @!attribute [r] source_backup
+          #   @return [::String]
+          #     Output only. Name of the backup from which this backup was copied. If a backup is
+          #     not created by copying a backup, this field will be empty.
+          #     Values are of the form:
+          #     projects/<project>/instances/<instance>/backups/<backup>.
           # @!attribute [rw] expire_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Required. The expiration time of the backup, with microseconds
@@ -395,6 +400,12 @@ module Google
           # @!attribute [r] source_table
           #   @return [::String]
           #     Output only. Name of the table the backup was created from.
+          # @!attribute [r] source_backup
+          #   @return [::String]
+          #     Output only. Name of the backup from which this backup was copied. If a backup is
+          #     not created by copying a backup, this field will be empty.
+          #     Values are of the form:
+          #     projects/<project>/instances/<instance>/backups/<backup>.
           class BackupInfo
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

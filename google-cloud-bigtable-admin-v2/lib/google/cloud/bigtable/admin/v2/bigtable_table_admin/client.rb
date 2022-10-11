@@ -71,6 +71,8 @@ module Google
 
                   default_config.rpcs.create_table.timeout = 300.0
 
+                  default_config.rpcs.create_table_from_snapshot.timeout = 60.0
+
                   default_config.rpcs.list_tables.timeout = 60.0
                   default_config.rpcs.list_tables.retry_policy = {
                     initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [14, 4]
@@ -97,6 +99,8 @@ module Google
                     initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [14, 4]
                   }
 
+                  default_config.rpcs.snapshot_table.timeout = 60.0
+
                   default_config.rpcs.get_snapshot.timeout = 60.0
                   default_config.rpcs.get_snapshot.retry_policy = {
                     initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [14, 4]
@@ -108,24 +112,6 @@ module Google
                   }
 
                   default_config.rpcs.delete_snapshot.timeout = 60.0
-
-                  default_config.rpcs.create_backup.timeout = 60.0
-
-                  default_config.rpcs.get_backup.timeout = 60.0
-                  default_config.rpcs.get_backup.retry_policy = {
-                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [14, 4]
-                  }
-
-                  default_config.rpcs.update_backup.timeout = 60.0
-
-                  default_config.rpcs.delete_backup.timeout = 60.0
-
-                  default_config.rpcs.list_backups.timeout = 60.0
-                  default_config.rpcs.list_backups.retry_policy = {
-                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [14, 4]
-                  }
-
-                  default_config.rpcs.restore_table.timeout = 60.0
 
                   default_config.rpcs.get_iam_policy.timeout = 60.0
                   default_config.rpcs.get_iam_policy.retry_policy = {
@@ -256,8 +242,8 @@ module Google
               #     Required. The unique name of the instance in which to create the table.
               #     Values are of the form `projects/{project}/instances/{instance}`.
               #   @param table_id [::String]
-              #     Required. The name by which the new table should be referred to within the parent
-              #     instance, e.g., `foobar` rather than `{parent}/tables/foobar`.
+              #     Required. The name by which the new table should be referred to within the
+              #     parent instance, e.g., `foobar` rather than `{parent}/tables/foobar`.
               #     Maximum 50 characters.
               #   @param table [::Google::Cloud::Bigtable::Admin::V2::Table, ::Hash]
               #     Required. The Table to create.
@@ -372,12 +358,12 @@ module Google
               #     Required. The unique name of the instance in which to create the table.
               #     Values are of the form `projects/{project}/instances/{instance}`.
               #   @param table_id [::String]
-              #     Required. The name by which the new table should be referred to within the parent
-              #     instance, e.g., `foobar` rather than `{parent}/tables/foobar`.
+              #     Required. The name by which the new table should be referred to within the
+              #     parent instance, e.g., `foobar` rather than `{parent}/tables/foobar`.
               #   @param source_snapshot [::String]
-              #     Required. The unique name of the snapshot from which to restore the table. The
-              #     snapshot and the table must be in the same instance.
-              #     Values are of the form
+              #     Required. The unique name of the snapshot from which to restore the table.
+              #     The snapshot and the table must be in the same instance. Values are of the
+              #     form
               #     `projects/{project}/instances/{instance}/clusters/{cluster}/snapshots/{snapshot}`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
@@ -471,11 +457,12 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The unique name of the instance for which tables should be listed.
-              #     Values are of the form `projects/{project}/instances/{instance}`.
+              #     Required. The unique name of the instance for which tables should be
+              #     listed. Values are of the form `projects/{project}/instances/{instance}`.
               #   @param view [::Google::Cloud::Bigtable::Admin::V2::Table::View]
               #     The view to be applied to the returned tables' fields.
-              #     Only NAME_ONLY view (default) and REPLICATION_VIEW are supported.
+              #     Only NAME_ONLY view (default), REPLICATION_VIEW and ENCRYPTION_VIEW are
+              #     supported.
               #   @param page_size [::Integer]
               #     Maximum number of results per page.
               #
@@ -961,10 +948,10 @@ module Google
               #     Values are of the form
               #     `projects/{project}/instances/{instance}/tables/{table}`.
               #   @param modifications [::Array<::Google::Cloud::Bigtable::Admin::V2::ModifyColumnFamiliesRequest::Modification, ::Hash>]
-              #     Required. Modifications to be atomically applied to the specified table's families.
-              #     Entries are applied in order, meaning that earlier modifications can be
-              #     masked by later ones (in the case of repeated updates to the same family,
-              #     for example).
+              #     Required. Modifications to be atomically applied to the specified table's
+              #     families. Entries are applied in order, meaning that earlier modifications
+              #     can be masked by later ones (in the case of repeated updates to the same
+              #     family, for example).
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Bigtable::Admin::V2::Table]
@@ -1146,8 +1133,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The unique name of the Table for which to create a consistency token.
-              #     Values are of the form
+              #     Required. The unique name of the Table for which to create a consistency
+              #     token. Values are of the form
               #     `projects/{project}/instances/{instance}/tables/{table}`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
@@ -1235,8 +1222,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The unique name of the Table for which to check replication consistency.
-              #     Values are of the form
+              #     Required. The unique name of the Table for which to check replication
+              #     consistency. Values are of the form
               #     `projects/{project}/instances/{instance}/tables/{table}`.
               #   @param consistency_token [::String]
               #     Required. The token created using GenerateConsistencyToken for the Table.
@@ -1339,9 +1326,9 @@ module Google
               #     Values are of the form
               #     `projects/{project}/instances/{instance}/clusters/{cluster}`.
               #   @param snapshot_id [::String]
-              #     Required. The ID by which the new snapshot should be referred to within the parent
-              #     cluster, e.g., `mysnapshot` of the form: `[_a-zA-Z0-9][-_.a-zA-Z0-9]*`
-              #     rather than
+              #     Required. The ID by which the new snapshot should be referred to within the
+              #     parent cluster, e.g., `mysnapshot` of the form:
+              #     `[_a-zA-Z0-9][-_.a-zA-Z0-9]*` rather than
               #     `projects/{project}/instances/{instance}/clusters/{cluster}/snapshots/mysnapshot`.
               #   @param ttl [::Google::Protobuf::Duration, ::Hash]
               #     The amount of time that the new snapshot can stay active after it is
@@ -1541,8 +1528,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The unique name of the cluster for which snapshots should be listed.
-              #     Values are of the form
+              #     Required. The unique name of the cluster for which snapshots should be
+              #     listed. Values are of the form
               #     `projects/{project}/instances/{instance}/clusters/{cluster}`.
               #     Use `{cluster} = '-'` to list snapshots for all clusters in an instance,
               #     e.g., `projects/{project}/instances/{instance}/clusters/-`.
@@ -1723,8 +1710,8 @@ module Google
               # {::Google::Longrunning::Operation#metadata metadata} field type is
               # {::Google::Cloud::Bigtable::Admin::V2::CreateBackupMetadata CreateBackupMetadata}. The
               # {::Google::Longrunning::Operation#response response} field type is
-              # {::Google::Cloud::Bigtable::Admin::V2::Backup Backup}, if successful. Cancelling the returned operation will stop the
-              # creation and delete the backup.
+              # {::Google::Cloud::Bigtable::Admin::V2::Backup Backup}, if successful. Cancelling the
+              # returned operation will stop the creation and delete the backup.
               #
               # @overload create_backup(request, options = nil)
               #   Pass arguments to `create_backup` via a request object, either of type
@@ -2154,8 +2141,9 @@ module Google
               #       * `size_bytes > 10000000000` --> The backup's size is greater than 10GB
               #   @param order_by [::String]
               #     An expression for specifying the sort order of the results of the request.
-              #     The string value should specify one or more fields in {::Google::Cloud::Bigtable::Admin::V2::Backup Backup}. The full
-              #     syntax is described at https://aip.dev/132#ordering.
+              #     The string value should specify one or more fields in
+              #     {::Google::Cloud::Bigtable::Admin::V2::Backup Backup}. The full syntax is described at
+              #     https://aip.dev/132#ordering.
               #
               #     Fields supported are:
               #        * name
@@ -2178,9 +2166,10 @@ module Google
               #     less, defaults to the server's maximum allowed page size.
               #   @param page_token [::String]
               #     If non-empty, `page_token` should contain a
-              #     {::Google::Cloud::Bigtable::Admin::V2::ListBackupsResponse#next_page_token next_page_token} from a
-              #     previous {::Google::Cloud::Bigtable::Admin::V2::ListBackupsResponse ListBackupsResponse} to the same `parent` and with the same
-              #     `filter`.
+              #     {::Google::Cloud::Bigtable::Admin::V2::ListBackupsResponse#next_page_token next_page_token}
+              #     from a previous
+              #     {::Google::Cloud::Bigtable::Admin::V2::ListBackupsResponse ListBackupsResponse} to the
+              #     same `parent` and with the same `filter`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Bigtable::Admin::V2::Backup>]
@@ -2364,7 +2353,124 @@ module Google
               end
 
               ##
-              # Gets the access control policy for a Table or Backup resource.
+              # Copy a Cloud Bigtable backup to a new backup in the destination cluster
+              # located in the destination instance and project.
+              #
+              # @overload copy_backup(request, options = nil)
+              #   Pass arguments to `copy_backup` via a request object, either of type
+              #   {::Google::Cloud::Bigtable::Admin::V2::CopyBackupRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigtable::Admin::V2::CopyBackupRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload copy_backup(parent: nil, backup_id: nil, source_backup: nil, expire_time: nil)
+              #   Pass arguments to `copy_backup` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The name of the destination cluster that will contain the backup
+              #     copy. The cluster must already exist. Values are of the form:
+              #     `projects/{project}/instances/{instance}/clusters/{cluster}`.
+              #   @param backup_id [::String]
+              #     Required. The id of the new backup. The `backup_id` along with `parent`
+              #     are combined as `{parent}/backups/{backup_id}` to create the full backup
+              #     name, of the form:
+              #     `projects/{project}/instances/{instance}/clusters/{cluster}/backups/{backup_id}`.
+              #     This string must be between 1 and 50 characters in length and match the
+              #     regex `[_a-zA-Z0-9][-_.a-zA-Z0-9]*`.
+              #   @param source_backup [::String]
+              #     Required. The source backup to be copied from.
+              #     The source backup needs to be in READY state for it to be copied.
+              #     Copying a copied backup is not allowed.
+              #     Once CopyBackup is in progress, the source backup cannot be deleted or
+              #     cleaned up on expiration until CopyBackup is finished.
+              #     Values are of the form:
+              #     `projects/<project>/instances/<instance>/clusters/<cluster>/backups/<backup>`.
+              #   @param expire_time [::Google::Protobuf::Timestamp, ::Hash]
+              #     Required. Required. The expiration time of the copied backup with
+              #     microsecond granularity that must be at least 6 hours and at most 30 days
+              #     from the time the request is received. Once the `expire_time` has
+              #     passed, Cloud Bigtable will delete the backup and free the resources used
+              #     by the backup.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::CopyBackupRequest.new
+              #
+              #   # Call the copy_backup method.
+              #   result = client.copy_backup request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use this
+              #   # object to check the status of an operation, cancel it, or wait
+              #   # for results. Here is how to block until completion:
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "Error!"
+              #   end
+              #
+              def copy_backup request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigtable::Admin::V2::CopyBackupRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.copy_backup.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.copy_backup.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.copy_backup.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @bigtable_table_admin_stub.call_rpc :copy_backup, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Gets the access control policy for a Table resource.
               # Returns an empty policy if the resource exists but does not have a policy
               # set.
               #
@@ -2388,7 +2494,7 @@ module Google
               #     See the operation documentation for the appropriate value for this field.
               #   @param options [::Google::Iam::V1::GetPolicyOptions, ::Hash]
               #     OPTIONAL: A `GetPolicyOptions` object for specifying options to
-              #     `GetIamPolicy`.
+              #     `GetIamPolicy`. This field is only used by Cloud IAM.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Iam::V1::Policy]
@@ -2455,7 +2561,7 @@ module Google
               end
 
               ##
-              # Sets the access control policy on a Table or Backup resource.
+              # Sets the access control policy on a Table resource.
               # Replaces any existing policy.
               #
               # @overload set_iam_policy(request, options = nil)
@@ -2468,7 +2574,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload set_iam_policy(resource: nil, policy: nil, update_mask: nil)
+              # @overload set_iam_policy(resource: nil, policy: nil)
               #   Pass arguments to `set_iam_policy` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2481,12 +2587,6 @@ module Google
               #     the policy is limited to a few 10s of KB. An empty policy is a
               #     valid policy but certain Cloud Platform services (such as Projects)
               #     might reject them.
-              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-              #     OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
-              #     the fields in the mask will be modified. If no mask is provided, the
-              #     following default mask is used:
-              #
-              #     `paths: "bindings, etag"`
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Iam::V1::Policy]
@@ -2553,7 +2653,7 @@ module Google
               end
 
               ##
-              # Returns permissions that the caller has on the specified Table or Backup resource.
+              # Returns permissions that the caller has on the specified table resource.
               #
               # @overload test_iam_permissions(request, options = nil)
               #   Pass arguments to `test_iam_permissions` via a request object, either of type
@@ -2884,6 +2984,11 @@ module Google
                   #
                   attr_reader :restore_table
                   ##
+                  # RPC-specific configuration for `copy_backup`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :copy_backup
+                  ##
                   # RPC-specific configuration for `get_iam_policy`
                   # @return [::Gapic::Config::Method]
                   #
@@ -2943,6 +3048,8 @@ module Google
                     @list_backups = ::Gapic::Config::Method.new list_backups_config
                     restore_table_config = parent_rpcs.restore_table if parent_rpcs.respond_to? :restore_table
                     @restore_table = ::Gapic::Config::Method.new restore_table_config
+                    copy_backup_config = parent_rpcs.copy_backup if parent_rpcs.respond_to? :copy_backup
+                    @copy_backup = ::Gapic::Config::Method.new copy_backup_config
                     get_iam_policy_config = parent_rpcs.get_iam_policy if parent_rpcs.respond_to? :get_iam_policy
                     @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
                     set_iam_policy_config = parent_rpcs.set_iam_policy if parent_rpcs.respond_to? :set_iam_policy

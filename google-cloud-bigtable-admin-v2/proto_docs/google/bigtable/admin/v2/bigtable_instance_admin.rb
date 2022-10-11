@@ -42,7 +42,6 @@ module Google
           #     cluster ID, e.g., just `mycluster` rather than
           #     `projects/myproject/instances/myinstance/clusters/mycluster`.
           #     Fields marked `OutputOnly` must be left blank.
-          #     Currently, at most four clusters can be specified.
           class CreateInstanceRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

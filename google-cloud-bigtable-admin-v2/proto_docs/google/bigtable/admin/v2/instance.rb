@@ -35,19 +35,18 @@ module Google
           #     Required. The descriptive name for this instance as it appears in UIs.
           #     Can be changed at any time, but should be kept globally unique
           #     to avoid confusion.
-          # @!attribute [rw] state
+          # @!attribute [r] state
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Instance::State]
-          #     (`OutputOnly`)
-          #     The current state of the instance.
+          #     Output only. The current state of the instance.
           # @!attribute [rw] type
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Instance::Type]
-          #     The type of the instance. Defaults to `PRODUCTION`.
+          #     Required. The type of the instance. Defaults to `PRODUCTION`.
           # @!attribute [rw] labels
           #   @return [::Google::Protobuf::Map{::String => ::String}]
-          #     Labels are a flexible and lightweight mechanism for organizing cloud
-          #     resources into groups that reflect a customer's organizational needs and
-          #     deployment strategies. They can be used to filter resources and aggregate
-          #     metrics.
+          #     Required. Labels are a flexible and lightweight mechanism for organizing
+          #     cloud resources into groups that reflect a customer's organizational needs
+          #     and deployment strategies. They can be used to filter resources and
+          #     aggregate metrics.
           #
           #     * Label keys must be between 1 and 63 characters long and must conform to
           #       the regular expression: `[\p{Ll}\p{Lo}][\p{Ll}\p{Lo}\p{N}_-]{0,62}`.
@@ -57,9 +56,9 @@ module Google
           #     * Keys and values must both be under 128 bytes.
           # @!attribute [r] create_time
           #   @return [::Google::Protobuf::Timestamp]
-          #     Output only. A server-assigned timestamp representing when this Instance was created.
-          #     For instances created before this field was added (August 2021), this value
-          #     is `seconds: 0, nanos: 1`.
+          #     Output only. A server-assigned timestamp representing when this Instance
+          #     was created. For instances created before this field was added (August
+          #     2021), this value is `seconds: 0, nanos: 1`.
           # @!attribute [r] satisfies_pzs
           #   @return [::Boolean]
           #     Output only. Reserved for future use.
@@ -118,7 +117,7 @@ module Google
           #   @return [::Integer]
           #     The storage utilization that the Autoscaler should be trying to achieve.
           #     This number is limited between 2560 (2.5TiB) and 5120 (5TiB) for a SSD
-          #     cluster and between 8192 (8TiB) and 16384 (16TiB) for an HDD cluster;
+          #     cluster and between 8192 (8TiB) and 16384 (16TiB) for an HDD cluster,
           #     otherwise it will return INVALID_ARGUMENT error. If this value is set to 0,
           #     it will be treated as if it were set to the default value: 2560 for SSD,
           #     8192 for HDD.
@@ -148,8 +147,8 @@ module Google
           #     `projects/{project}/instances/{instance}/clusters/[a-z][-a-z0-9]*`.
           # @!attribute [rw] location
           #   @return [::String]
-          #     Immutable. The location where this cluster's nodes and storage reside. For best
-          #     performance, clients should be located as close as possible to this
+          #     Immutable. The location where this cluster's nodes and storage reside. For
+          #     best performance, clients should be located as close as possible to this
           #     cluster. Currently only zones are supported, so values should be of the
           #     form `projects/{project}/locations/{zone}`.
           # @!attribute [r] state
@@ -205,7 +204,6 @@ module Google
             #      `cloudkms.cryptoKeyEncrypterDecrypter` role on the CMEK key.
             #      2) Only regional keys can be used and the region of the CMEK key must
             #      match the region of the cluster.
-            #      3) All clusters within an instance must use the same CMEK key.
             #     Values are of the form
             #     `projects/{project}/locations/{location}/keyRings/{keyring}/cryptoKeys/{key}`
             class EncryptionConfig
@@ -326,10 +324,10 @@ module Google
           #     Tablet End Key (inclusive).
           # @!attribute [r] node_cpu_usage_percent
           #   @return [::Float]
-          #     Output only. The average CPU usage spent by a node on this tablet over the start_time to
-          #     end_time time range. The percentage is the amount of CPU used by the node
-          #     to serve the tablet, from 0% (tablet was not interacted with) to 100% (the
-          #     node spent all cycles serving the hot tablet).
+          #     Output only. The average CPU usage spent by a node on this tablet over the
+          #     start_time to end_time time range. The percentage is the amount of CPU used
+          #     by the node to serve the tablet, from 0% (tablet was not interacted with)
+          #     to 100% (the node spent all cycles serving the hot tablet).
           class HotTablet
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

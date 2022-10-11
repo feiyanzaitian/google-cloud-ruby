@@ -278,7 +278,6 @@ module Google
               #     cluster ID, e.g., just `mycluster` rather than
               #     `projects/myproject/instances/myinstance/clusters/mycluster`.
               #     Fields marked `OutputOnly` must be left blank.
-              #     Currently, at most four clusters can be specified.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Gapic::Operation]
@@ -541,7 +540,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload update_instance(name: nil, display_name: nil, state: nil, type: nil, labels: nil)
+              # @overload update_instance(name: nil, display_name: nil, type: nil, labels: nil)
               #   Pass arguments to `update_instance` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -553,16 +552,13 @@ module Google
               #     Required. The descriptive name for this instance as it appears in UIs.
               #     Can be changed at any time, but should be kept globally unique
               #     to avoid confusion.
-              #   @param state [::Google::Cloud::Bigtable::Admin::V2::Instance::State]
-              #     (`OutputOnly`)
-              #     The current state of the instance.
               #   @param type [::Google::Cloud::Bigtable::Admin::V2::Instance::Type]
-              #     The type of the instance. Defaults to `PRODUCTION`.
+              #     Required. The type of the instance. Defaults to `PRODUCTION`.
               #   @param labels [::Hash{::String => ::String}]
-              #     Labels are a flexible and lightweight mechanism for organizing cloud
-              #     resources into groups that reflect a customer's organizational needs and
-              #     deployment strategies. They can be used to filter resources and aggregate
-              #     metrics.
+              #     Required. Labels are a flexible and lightweight mechanism for organizing
+              #     cloud resources into groups that reflect a customer's organizational needs
+              #     and deployment strategies. They can be used to filter resources and
+              #     aggregate metrics.
               #
               #     * Label keys must be between 1 and 63 characters long and must conform to
               #       the regular expression: `[\p{Ll}\p{Lo}][\p{Ll}\p{Lo}\p{N}_-]{0,62}`.
@@ -1128,8 +1124,8 @@ module Google
               #     The unique name of the cluster. Values are of the form
               #     `projects/{project}/instances/{instance}/clusters/[a-z][-a-z0-9]*`.
               #   @param location [::String]
-              #     Immutable. The location where this cluster's nodes and storage reside. For best
-              #     performance, clients should be located as close as possible to this
+              #     Immutable. The location where this cluster's nodes and storage reside. For
+              #     best performance, clients should be located as close as possible to this
               #     cluster. Currently only zones are supported, so values should be of the
               #     form `projects/{project}/locations/{zone}`.
               #   @param serve_nodes [::Integer]
@@ -1908,7 +1904,7 @@ module Google
               #     See the operation documentation for the appropriate value for this field.
               #   @param options [::Google::Iam::V1::GetPolicyOptions, ::Hash]
               #     OPTIONAL: A `GetPolicyOptions` object for specifying options to
-              #     `GetIamPolicy`.
+              #     `GetIamPolicy`. This field is only used by Cloud IAM.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Iam::V1::Policy]
@@ -1988,7 +1984,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload set_iam_policy(resource: nil, policy: nil, update_mask: nil)
+              # @overload set_iam_policy(resource: nil, policy: nil)
               #   Pass arguments to `set_iam_policy` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2001,12 +1997,6 @@ module Google
               #     the policy is limited to a few 10s of KB. An empty policy is a
               #     valid policy but certain Cloud Platform services (such as Projects)
               #     might reject them.
-              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-              #     OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
-              #     the fields in the mask will be modified. If no mask is provided, the
-              #     following default mask is used:
-              #
-              #     `paths: "bindings, etag"`
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Iam::V1::Policy]
