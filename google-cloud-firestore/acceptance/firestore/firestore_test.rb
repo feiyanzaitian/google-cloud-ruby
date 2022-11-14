@@ -71,4 +71,32 @@ describe "Firestore", :firestore_acceptance do
     docs = firestore.get_all doc1, doc2, field_mask: :foo
     _(docs.to_a.count).must_equal 2
   end
+
+  it "has collections method with read time" do
+    collections_init = firestore.cols.map(&:collection_id)
+
+    rand_hex = SecureRandom.hex(4)
+    collections_1 = ["a", "b", "c", "d", "e"]
+    collections_1.each do |collection|
+      firestore.col(collection+rand_hex).add
+    end
+
+    sleep(2)
+    read_time = Google::Protobuf::Timestamp.new seconds: Time.now.to_i
+    sleep(2)
+
+    collections_2 = ["v", "w", "x", "y", "z"]
+    collections_2.each do |collection|
+      firestore.col(collection+rand_hex).add
+    end
+
+    cols = firestore.cols read_time: read_time
+    _(cols).must_be_kind_of Enumerator
+    _(cols.to_a.count - collections_init.count).must_equal collections_1.count
+    _(cols.map(&:collection_id).sort - collections_init).must_equal collections_1.sort.each.map { |collection| collection+rand_hex}
+    cols = firestore.cols read_time: Google::Protobuf::Timestamp.new(seconds: Time.now.to_i)
+    _(cols).must_be_kind_of Enumerator
+    _(cols.to_a.count - collections_init.count).must_equal (collections_1 + collections_2).count
+    _(cols.map(&:collection_id).sort - collections_init).must_equal (collections_1 + collections_2).sort.each.map { |collection| collection+rand_hex}
+  end
 end

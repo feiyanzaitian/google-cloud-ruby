@@ -161,8 +161,9 @@ class MockFirestore < Minitest::Spec
 
   def list_collection_ids_args parent: "projects/#{project}/databases/(default)/documents",
                                page_size: nil,
-                               page_token: nil
-    [{ parent: parent, page_size: page_size, page_token: page_token }, default_options]
+                               page_token: nil,
+                               read_time: nil
+    [{ parent: parent, page_size: page_size, page_token: page_token, read_time: read_time }, default_options]
   end
 
   def list_collection_ids_resp *ids, next_page_token: nil
@@ -186,14 +187,16 @@ class MockFirestore < Minitest::Spec
                            parent: "projects/#{project}/databases/(default)/documents",
                            partition_count: 2,
                            page_token: nil,
-                           page_size: nil
+                           page_size: nil,
+                           read_time: nil
     [
       Google::Cloud::Firestore::V1::PartitionQueryRequest.new(
         parent: parent,
         structured_query: query_grpc,
         partition_count: partition_count,
         page_token: page_token,
-        page_size: page_size
+        page_size: page_size,
+        read_time: read_time
       )
     ]
   end
