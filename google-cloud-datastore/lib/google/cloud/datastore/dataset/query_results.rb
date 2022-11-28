@@ -176,6 +176,10 @@ module Google
             ensure_service!
             query.start_cursor = cursor.to_grpc # should always be a Cursor...
             query.offset = 0 # Never carry an offset across batches
+            unless query.limit.nil?
+              # Reduce the limit by the number of entities returned in the current batch
+              query.limit.value -= count
+            end
             query_res = service.run_query query, namespace, read_time: read_time
             self.class.from_grpc query_res, service, namespace, query, read_time
           end
