@@ -287,7 +287,7 @@ describe "Document", :firestore_acceptance do
     end
 
     sleep(1)
-    read_time = Time.now.utc
+    read_time = Time.now
     sleep(1)
 
     collections_2 = ["f", "g", "h", "i", "j"]

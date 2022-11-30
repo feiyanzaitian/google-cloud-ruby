@@ -72,7 +72,7 @@ describe "Firestore", :firestore_acceptance do
     _(docs.to_a.count).must_equal 2
   end
 
-  it "has collections method with read time" do
+  focus; it "has collections method with read time" do
     collections_init = firestore.cols.map(&:collection_id)
 
     rand_hex = SecureRandom.hex(4)
@@ -81,9 +81,9 @@ describe "Firestore", :firestore_acceptance do
       firestore.col(collection+rand_hex).add
     end
 
-    sleep(1)
+    sleep(2)
     read_time = Time.now
-    sleep(1)
+    sleep(2)
 
     collections_2 = ["v", "w", "x", "y", "z"]
     collections_2.each do |collection|
