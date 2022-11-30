@@ -81,9 +81,9 @@ describe "Firestore", :firestore_acceptance do
       firestore.col(collection+rand_hex).add
     end
 
-    sleep(2)
-    read_time = Google::Protobuf::Timestamp.new seconds: Time.now.to_i
-    sleep(2)
+    sleep(1)
+    read_time = Time.now
+    sleep(1)
 
     collections_2 = ["v", "w", "x", "y", "z"]
     collections_2.each do |collection|

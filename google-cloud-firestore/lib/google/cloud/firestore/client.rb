@@ -85,7 +85,7 @@ module Google
         ##
         # Retrieves an enumerator for the root collections.
         #
-        # @param [Google::Protobuf::Timestamp] read_time Reads documents as they were at the given time.
+        # @param [Time] read_time Reads documents as they were at the given time.
         #   This may not be older than 270 seconds. Optional
         #
         # @yield [collections] The block for accessing the collections.

@@ -48,7 +48,7 @@ module Google
         #
         # @param [Integer] partition_count The desired maximum number of partition points. The number must be strictly
         #   positive. The actual number of partitions returned may be fewer.
-        # @param [Google::Protobuf::Timestamp] read_time Reads documents as they were at the given time.
+        # @param [Timestamp] read_time Reads documents as they were at the given time.
         #   This may not be older than 270 seconds. Optional
         #
         # @return [Array<QueryPartition>] An ordered array of query partitions.

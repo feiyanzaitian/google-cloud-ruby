@@ -227,6 +227,18 @@ class MockFirestore < Minitest::Spec
   def document_path doc_id
     "projects/#{project}/databases/(default)/documents/my-collection-id/#{doc_id}"
   end
+
+  def read_time_to_timestamp time
+    return nil if time.nil?
+
+    # Force the object to be a Time object.
+    time = time.to_time.utc
+
+    Google::Protobuf::Timestamp.new(
+      seconds: time.to_i,
+      nanos:   time.usec * 1000
+    )
+  end
 end
 
 class WatchFirestore < MockFirestore

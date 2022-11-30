@@ -91,7 +91,7 @@ module Google
               parent: parent,
               page_size: max,
               page_token: token,
-              read_time: read_time
+              read_time: read_time_to_timestamp(read_time)
             },
             call_options(parent: database_path)
           )
@@ -106,7 +106,7 @@ module Google
             partition_count: partition_count,
             page_token: token,
             page_size: max,
-            read_time: read_time
+            read_time: read_time_to_timestamp(read_time)
           )
           paged_enum = firestore.partition_query request
           paged_enum.response
@@ -195,6 +195,18 @@ module Google
           return nil if mask.empty?
 
           Google::Cloud::Firestore::V1::DocumentMask.new field_paths: mask
+        end
+
+        def read_time_to_timestamp time
+          return nil if time.nil?
+
+          # Force the object to be a Time object.
+          time = time.to_time.utc
+
+          Google::Protobuf::Timestamp.new(
+            seconds: time.to_i,
+            nanos:   time.usec * 1000
+          )
         end
       end
     end

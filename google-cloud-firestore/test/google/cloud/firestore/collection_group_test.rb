@@ -20,7 +20,7 @@ describe Google::Cloud::Firestore::CollectionGroup, :mock_firestore do
     Google::Cloud::Firestore::CollectionGroup.from_collection_id documents_path, collection_id, firestore
   end
   let(:expected_query) { collection_group_query }
-  let(:read_time) { Google::Protobuf::Timestamp.new seconds: Time.now.to_i }
+  let(:read_time) { Time.now }
 
 
   it "raises if partition_count is < 1" do
@@ -112,7 +112,7 @@ describe Google::Cloud::Firestore::CollectionGroup, :mock_firestore do
     # Use an ID ending in "-" to ensure correct sorting, since full path strings are sorted dash before slash
     # See Google::Cloud::Firestore::ResourcePath
     list_res = paged_enum_struct partition_query_resp(doc_ids: ["alice-", "alice"])
-    firestore_mock.expect :partition_query, list_res, partition_query_args(expected_query, read_time: read_time)
+    firestore_mock.expect :partition_query, list_res, partition_query_args(expected_query, read_time: read_time_to_timestamp(read_time))
 
     partitions = collection_group.partitions 3, read_time: read_time
 

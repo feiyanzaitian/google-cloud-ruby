@@ -183,7 +183,7 @@ describe Google::Cloud::Firestore::CollectionGroup, :firestore_acceptance do
     it "queries a collection group using partitions on different timestamps" do
       rand_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
 
-      read_time = Google::Protobuf::Timestamp.new(seconds: Time.now.to_i)
+      read_time = Time.now
       sleep(1)
 
       document_ids = ["a", "b", "c"].map do |prefix|

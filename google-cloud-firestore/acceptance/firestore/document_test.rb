@@ -278,7 +278,7 @@ describe "Document", :firestore_acceptance do
     _(collection_ids.sort).must_equal collections.sort
   end
 
-  it "has collections method with read time" do
+  focus; it "has collections method with read time" do
     collections_doc_ref = root_col.add
 
     collections = ["a", "b", "c", "d", "e"]
@@ -287,7 +287,7 @@ describe "Document", :firestore_acceptance do
     end
 
     sleep(1)
-    read_time = Google::Protobuf::Timestamp.new(seconds: Time.now.to_i)
+    read_time = Time.now.utc
     sleep(1)
 
     collections_2 = ["f", "g", "h", "i", "j"]
