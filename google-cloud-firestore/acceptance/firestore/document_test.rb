@@ -278,7 +278,7 @@ describe "Document", :firestore_acceptance do
     _(collection_ids.sort).must_equal collections.sort
   end
 
-  focus; it "has collections method with read time" do
+  it "has collections method with read time" do
     collections_doc_ref = root_col.add
 
     collections = ["a", "b", "c", "d", "e"]
