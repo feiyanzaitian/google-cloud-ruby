@@ -102,8 +102,8 @@ module Google
           # The HTTP object that makes calls to API.
           # This must be a Faraday object.
           def http
-            @http ||= Faraday.new url: @url, proxy: 'http://httpproxy-tcop.vip.ebay.com:80', request: {
-              open_timeout: @timeout, timeout: @timeout
+            @http ||= Faraday.new url: @url, request: {
+              open_timeout: @timeout, timeout: @timeout, proxy: 'http://httpproxy-tcop.vip.ebay.com:80'
             }.delete_if { |_k, v| v.nil? }
           end
 
