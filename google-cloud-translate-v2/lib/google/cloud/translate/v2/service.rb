@@ -108,7 +108,7 @@ module Google
             # }.delete_if { |_k, v| v.nil? }, ssl: { verify: true }, proxy: { uri: URI("http://httpproxy-tcop.vip.ebay.com:80")} do |f|
             #   f.adapter :net_http
             # end
-            @http ||= Faraday.new(:url => 'https://translation.googleapis.com') do |faraday|
+            @http ||= Faraday.new(:url => @url) do |faraday|
               faraday.request  :url_encoded
               faraday.response :logger
               faraday.adapter  Faraday.default_adapter
