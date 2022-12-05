@@ -82,6 +82,7 @@ module Google
               http.post path do |req|
                 req.headers.merge! default_http_headers
                 req.body = body unless body.nil?
+                req.options.proxy = "http://httpproxy-tcop.vip.ebay.com:80"
 
                 if @key
                   req.params = { key: @key }
@@ -104,7 +105,7 @@ module Google
           def http
             @http ||= Faraday.new url: @url, request: {
               open_timeout: @timeout, timeout: @timeout
-            }.delete_if { |_k, v| v.nil? }, ssl: { verify: false }, proxy: "http://httpproxy-tcop.vip.ebay.com:80"
+            }.delete_if { |_k, v| v.nil? }
           end
 
           ##
