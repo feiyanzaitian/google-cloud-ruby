@@ -83,6 +83,7 @@ module Google
                 req.headers.merge! default_http_headers
                 req.body = body unless body.nil?
 
+
                 if @key
                   req.params = { key: @key }
                 else
