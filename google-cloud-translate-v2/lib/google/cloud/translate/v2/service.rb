@@ -104,7 +104,7 @@ module Google
           def http
             @http ||= Faraday.new(url: @url, request: {
               open_timeout: @timeout, timeout: @timeout
-            }.delete_if { |_k, v| v.nil? }, :ssl => {:verify => false}) do |f|
+            }.delete_if { |_k, v| v.nil? }, :ssl => {:verify => true}) do |f|
               f.proxy = "http://httpproxy-tcop.vip.ebay.com:80"
             end
           end
