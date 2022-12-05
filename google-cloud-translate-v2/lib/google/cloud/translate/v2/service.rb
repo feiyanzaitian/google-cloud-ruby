@@ -106,7 +106,7 @@ module Google
             puts @timeout
             @http ||= Faraday.new url: @url, request: {
               open_timeout: @timeout, timeout: @timeout
-            }.delete_if { |_k, v| v.nil? }, ssl: { verify: false }, proxy: { uri: URI("http://httpproxy-tcop.vip.ebay.com:80")}
+            }.delete_if { |_k, v| v.nil? }, ssl: { verify: true }, proxy: { uri: URI("http://httpproxy-tcop.vip.ebay.com:80")}
           end
 
           ##
