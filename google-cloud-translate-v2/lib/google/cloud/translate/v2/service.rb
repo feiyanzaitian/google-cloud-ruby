@@ -108,12 +108,21 @@ module Google
             # }.delete_if { |_k, v| v.nil? }, ssl: { verify: true }, proxy: { uri: URI("http://httpproxy-tcop.vip.ebay.com:80")} do |f|
             #   f.adapter :net_http
             # end
-            @http ||= Faraday.new(:url => @url) do |faraday|
-              faraday.request  :url_encoded
-              faraday.response :logger
-              faraday.adapter  Faraday.default_adapter
-              faraday.proxy="http://httpproxy-tcop.vip.ebay.com:80"
-            end
+            # @http ||= Faraday.new(url: @url, request: {
+            #     open_timeout: @timeout, timeout: @timeout
+            #   }.delete_if { |_k, v| v.nil? }, ssl: { verify: false }, proxy: URI("http://httpproxy-tcop.vip.ebay.com:80")) do |faraday|
+            #     faraday.request  :url_encoded
+            #     faraday.response :logger
+            #     faraday.adapter  Faraday.default_adapter
+            #     faraday.proxy="http://httpproxy-tcop.vip.ebay.com:80"
+            #   end
+            @http ||= Faraday.new(url: @url, request: {
+              open_timeout: @timeout, timeout: @timeout, proxy: "http://httpproxy-tcop.vip.ebay.com:80"
+            }.delete_if { |_k, v| v.nil? }, ssl: { verify: false }) do |faraday|
+                faraday.request  :url_encoded
+                faraday.response :logger
+                faraday.adapter  Faraday.default_adapter
+              end
           end
 
           ##
