@@ -102,7 +102,6 @@ module Google
           # The HTTP object that makes calls to API.
           # This must be a Faraday object.
           def http
-            puts @timeout
             # @http ||= Faraday.new url: @url, request: {
             #   open_timeout: @timeout, timeout: @timeout
             # }.delete_if { |_k, v| v.nil? }, ssl: { verify: true }, proxy: { uri: URI("http://httpproxy-tcop.vip.ebay.com:80")} do |f|
@@ -117,12 +116,10 @@ module Google
             #     faraday.proxy="http://httpproxy-tcop.vip.ebay.com:80"
             #   end
             @http ||= Faraday.new(url: @url, request: {
-              open_timeout: @timeout, timeout: @timeout, proxy: "http://httpproxy-tcop.vip.ebay.com:80"
-            }.delete_if { |_k, v| v.nil? }, ssl: { verify: false }) do |faraday|
-                faraday.request  :url_encoded
-                faraday.response :logger
-                faraday.adapter  Faraday.default_adapter
-              end
+              open_timeout: @timeout, timeout: @timeout
+            }.delete_if { |_k, v| v.nil? }, ssl: { verify: false }, proxy: "http://httpproxy-tcop.vip.ebay.com:80") do |faraday|
+                faraday.adapter :em_http
+            end
           end
 
           ##
