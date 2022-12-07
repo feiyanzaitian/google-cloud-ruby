@@ -82,7 +82,6 @@ module Google
               http.post path do |req|
                 req.headers.merge! default_http_headers
                 req.body = body unless body.nil?
-                req.options.proxy = "http://httpproxy-tcop.vip.ebay.com:80"
 
                 if @key
                   req.params = { key: @key }
@@ -103,24 +102,9 @@ module Google
           # The HTTP object that makes calls to API.
           # This must be a Faraday object.
           def http
-            # @http ||= Faraday.new url: @url, request: {
-            #   open_timeout: @timeout, timeout: @timeout
-            # }.delete_if { |_k, v| v.nil? }, ssl: { verify: true }, proxy: { uri: URI("http://httpproxy-tcop.vip.ebay.com:80")} do |f|
-            #   f.adapter :net_http
-            # end
-            # @http ||= Faraday.new(url: @url, request: {
-            #     open_timeout: @timeout, timeout: @timeout
-            #   }.delete_if { |_k, v| v.nil? }, ssl: { verify: false }, proxy: URI("http://httpproxy-tcop.vip.ebay.com:80")) do |faraday|
-            #     faraday.request  :url_encoded
-            #     faraday.response :logger
-            #     faraday.adapter  Faraday.default_adapter
-            #     faraday.proxy="http://httpproxy-tcop.vip.ebay.com:80"
-            #   end
             @http ||= Faraday.new url: @url, request: {
               open_timeout: @timeout, timeout: @timeout
-            }.delete_if { |_k, v| v.nil? }, ssl: { verify: false }, proxy: "http://httpproxy-tcop.vip.ebay.com:80" do |faraday|
-              faraday.response :logger
-            end
+            }.delete_if { |_k, v| v.nil? }, proxy: "http://httpproxy-tcop.vip.ebay.com:80"
           end
 
           ##
